@@ -18,7 +18,7 @@ interface HeroOrbProps {
  * a dark translucent glass disc with a bright rim and top highlight,
  * not a flat colored circle.
  *
- * - idle: faint blue halo, gentle breathing
+ * - idle: faint blue halo
  * - connecting: rotating conic ring
  * - connected: emerald halo
  *
@@ -77,9 +77,7 @@ export const HeroOrb: React.FC<HeroOrbProps> = React.memo(
         >
           {/* halo */}
           <span
-            className={`absolute inset-0 rounded-full blur-2xl transition-colors duration-700 ${halo} ${
-              state === "idle" ? "orb-breathe" : ""
-            }`}
+            className={`absolute inset-0 rounded-full blur-2xl transition-colors duration-700 ${halo}`}
           />
           {/* shockwave on connect */}
           {state === "connected" && shockKey > 0 && (
@@ -87,10 +85,8 @@ export const HeroOrb: React.FC<HeroOrbProps> = React.memo(
           )}
           {/* rotating ring while connecting */}
           {state === "connecting" && <span className="orb-ring" />}
-          {/* slow aurora ring while idle — quiet sign of life */}
-          {state === "idle" && <span className="orb-ring-idle" />}
           {/* glass disc */}
-          <span className="absolute inset-0 rounded-full border border-white/[0.14] bg-white/[0.05] backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] transition-colors duration-500 group-hover:border-white/[0.22]">
+          <span className="absolute inset-0 rounded-full border border-white/[0.14] bg-white/[0.05] shadow-[0_8px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] transition-colors duration-500 group-hover:border-white/[0.22]">
             {/* icon — crossfades between states. Both the exiting and the
             entering icon are absolutely positioned over the same centered
             box: with popLayout the exiting icon was popped out of the flex

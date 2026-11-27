@@ -31,6 +31,7 @@ import { useI18n } from "../../i18n";
 import { HeroOrb, OrbState } from "../HeroOrb";
 import { Sparkline } from "../Sparkline";
 import { TransportsSection } from "../TransportsSection";
+import { TelegramView } from "./TelegramView";
 import { GoalPicker } from "../GoalPicker";
 import { useAutoTune } from "../AutoTuneModal";
 import { AppSplitModal } from "../AppSplitModal";
@@ -92,6 +93,11 @@ export const DashboardView: React.FC<DashboardViewProps> = React.memo(
     onExpertModeChange,
   }) => {
     const { t } = useI18n();
+    const telegramToggle = (
+      <motion.div variants={itemVariants}>
+        <TelegramView variant="dashboard" />
+      </motion.div>
+    );
 
     // Rolling ping history for sparklines (real probe data, 40 samples).
     // Keyed by diagnostics.timestamp so re-renders without new probe data
@@ -582,6 +588,8 @@ export const DashboardView: React.FC<DashboardViewProps> = React.memo(
             </div>
           </motion.div>
 
+          {telegramToggle}
+
           {autoTuneModal}
           <AppSplitModal
             isOpen={isAppSplitOpen}
@@ -789,6 +797,8 @@ export const DashboardView: React.FC<DashboardViewProps> = React.memo(
             </div>
           </div>
         </motion.div>
+
+        {telegramToggle}
 
         {/* Camouflage transports (self-contained section) */}
         <motion.div variants={itemVariants}>
